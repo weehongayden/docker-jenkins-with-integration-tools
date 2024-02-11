@@ -15,7 +15,8 @@ I've broken it into smaller articles to make it easier to read and revisit, plea
 
 ## Article
 - [ ] Part 0: Preparation Work
-- [ ] Part 1: Setup HashiCorp Vault Service
+- [ ] Part 1: Setup Ngrok Service
+- [ ] Part 2: Setup HashiCorp Vault Service
     - [ ] Create Policy
     - [ ] Enable K/V Engine 2
     - [ ] Create K/V Secret
@@ -24,7 +25,6 @@ I've broken it into smaller articles to make it easier to read and revisit, plea
     - [ ] Generate App Role Token
     - [ ] Create Shell Script
     - [ ] Setup Crontab
-- [ ] Part 2: Setup Ngrok Service
 - [ ] Part 3: Setup Jenkins Service
 - [ ] Part 4: Setup SonarQube Service
 - [ ] Part 5: Build and Deploy Docker Image

@@ -1,0 +1,2 @@
+# Ignore ngrok config file
+**/ngrok.yaml
