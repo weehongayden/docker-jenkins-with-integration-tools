@@ -3,3 +3,8 @@
 
 # Ignore ngrok config file
 **/ngrok.yaml
+
+# Ignore everything inside vault/ssl directory
+**/vault/raft/*
+**/vault/ssl/*
+**/vault/vault.db
