@@ -72,12 +72,32 @@ services:
     networks:
       - devops
 
+  jenkins:
+    # Create a custom jenkins image with docker installed
+    image: weehong/jenkins:latest
+    container_name: jenkins
+    privileged: true
+    build:
+      context: ./jenkins
+      dockerfile: Dockerfile
+    environment:
+      - TZ=Asia/Singapore
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_data:/var/jenkins_home
+    restart: unless-stopped
+    networks:
+      - devops
+
 volumes:
   sonarqube_data:
   sonarqube_extensions:
   sonarqube_logs:
   postgresql:
   postgresql_data:
+  jenkins_data:
 
 
 networks:
