@@ -73,13 +73,9 @@ services:
       - devops
 
   jenkins:
-    # Create a custom jenkins image with docker installed
-    image: weehong/jenkins:latest
+    image: jenkins/jenkins:latest
     container_name: jenkins
     privileged: true
-    build:
-      context: ./jenkins
-      dockerfile: Dockerfile
     environment:
       - TZ=Asia/Singapore
     ports:
@@ -87,6 +83,26 @@ services:
       - "50000:50000"
     volumes:
       - jenkins_data:/var/jenkins_home
+    restart: unless-stopped
+    networks:
+      - devops
+
+  jenkins-agent-alpha:
+    # Create a custom Jenkins agent image with Docker installed
+    image: weehong/jenkins-agent:latest
+    container_name: jenkins-agent-alpha
+    privileged: true
+    user: root
+    build:
+      context: ./jenkins/agents
+      dockerfile: Dockerfile
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Asia/Singapore
+      - JENKINS_AGENT_SSH_PUBKEY=${JENKINS_AGENT_SSH_PUBLIC_KEY}
+    ports:
+      - "2222:22"
     restart: unless-stopped
     networks:
       - devops
