@@ -1,6 +1,9 @@
 # Ignore .env file to avoid committing sensitive information
 .env
 
+**/jenkins/agents/**/*
+!**/jenkins/agents/Dockerfile
+
 # Ignore ngrok config file
 **/ngrok.yaml
 
