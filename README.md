@@ -7,25 +7,24 @@ The tutorial article to use this repository will be posted on my website soon, I
 I've broken it into smaller articles to make it easier to read and revisit, please read the articles section.
 
 ## Tools
-- Jenkins
 - Docker
 - Ngrok
-- HashiCorp Vault
 - SonarQube
+- HashiCorp Vault
+- Jenkins
 
 ## Article
 - [ ] Part 0: Preparation Work
-- [ ] Part 1: Setup HashiCorp Vault Service
-    - [ ] Create Policy
-    - [ ] Enable K/V Engine 2
-    - [ ] Create K/V Secret
-    - [ ] Enable App Role 
-    - [ ] Create App Role
-    - [ ] Generate App Role Token
-    - [ ] Create Shell Script
-    - [ ] Setup Crontab
-- [ ] Part 2: Setup Ngrok Service
-- [ ] Part 3: Setup Jenkins Service
-- [ ] Part 4: Setup SonarQube Service
-- [ ] Part 5: Build and Deploy Docker Image
-- [ ] Part 6: Pull and Deploy Docker Image
+    <br/>[Link to article]() | [Link to video]()
+- [ ] Part 1: Setup Ngrok Service 
+    <br/>[Link to Branch](https://github.com/weehongayden/docker-jenkins-with-integration-tools/tree/part-1) | [Link to article]() | [Link to video]()
+- [ ] Part 2: Setup SonarQube Service 
+    <br/>[Link to Branch](https://github.com/weehongayden/docker-jenkins-with-integration-tools/tree/part-2) | [Link to article]() | [Link to video]()
+- [ ] Part 3: Setup HashiCorp Vault Service
+    <br/>[Link to Branch](https://github.com/weehongayden/docker-jenkins-with-integration-tools/tree/part-3) | [Link to article]() | [Link to video]()
+- [ ] Part 4: Setup Jenkins Service 
+    <br/>[Link to Branch](https://github.com/weehongayden/docker-jenkins-with-integration-tools/tree/part-4) | [Link to article]() | [Link to video]()
+- [ ] Part 5: Setup Jenkins Agent Service
+    <br/>[Link to Branch](https://github.com/weehongayden/docker-jenkins-with-integration-tools/tree/part-5) | [Link to article]() | [Link to video]()
+- [ ] Part 6: Build and Push Docker Image 
+    <br/>[Link to Branch](https://github.com/weehongayden/docker-jenkins-with-integration-tools/tree/part-6) | [Link to article]() | [Link to video]()

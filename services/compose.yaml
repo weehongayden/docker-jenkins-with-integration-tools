@@ -1,0 +1,118 @@
+version: "3.9"
+
+services:
+  ngrok:
+    container_name: ngrok
+    image: ngrok/ngrok:latest
+    ports:
+      - 80:4040
+    volumes:
+      - ./ngrok/ngrok.yaml:/etc/ngrok.yaml
+    command:
+      - start
+      - --all
+      - --config
+      - /etc/ngrok.yaml
+    restart: unless-stopped
+    networks:
+      - devops
+
+  db:
+    image: postgres:latest
+    container_name: db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - devops
+
+  sonar:
+    image: sonarqube:latest
+    container_name: sonar
+    ports:
+      - "9000:9000"
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      SONAR_JDBC_USERNAME: ${POSTGRES_USER}
+      SONAR_JDBC_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_extensions:/opt/sonarqube/extensions
+    restart: unless-stopped
+    depends_on:
+      - db
+    networks:
+      - devops
+
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault
+    ports:
+      - "8200:8200"
+    environment:
+      VAULT_ADDR: ${VAULT_ADDR}
+      VAULT_API_ADDR: ${VAULT_ADDR}
+      VAULT_CACERT: /vault/config/ssl/vault.crt
+    volumes:
+      - ./vault:/vault/file
+      - ./vault:/vault/config
+      - ./vault:/vault/data
+    cap_add:
+      - IPC_LOCK
+    entrypoint: vault server -config=/vault/config/config.hcl
+    restart: unless-stopped
+    networks:
+      - devops
+
+  jenkins:
+    image: jenkins/jenkins:latest
+    container_name: jenkins
+    privileged: true
+    environment:
+      - TZ=Asia/Singapore
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_data:/var/jenkins_home
+    restart: unless-stopped
+    networks:
+      - devops
+
+  jenkins-agent-alpha:
+    # Create a custom Jenkins agent image with Docker installed
+    image: weehong/jenkins-agent:latest
+    container_name: jenkins-agent-alpha
+    privileged: true
+    user: root
+    build:
+      context: ./jenkins/agents
+      dockerfile: Dockerfile
+    environment:
+      - TZ=Asia/Singapore
+      - JENKINS_AGENT_SSH_PUBKEY=${JENKINS_AGENT_SSH_PUBLIC_KEY}
+    ports:
+      - "2222:22"
+    restart: unless-stopped
+    networks:
+      - devops
+
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  postgresql:
+  postgresql_data:
+  jenkins_data:
+
+
+networks:
+  devops:

@@ -1,0 +1,13 @@
+# Ignore .env file to avoid committing sensitive information
+.env
+
+**/jenkins/agents/**/*
+!**/jenkins/agents/Dockerfile
+
+# Ignore ngrok config file
+**/ngrok.yaml
+
+# Ignore everything inside vault/ssl directory
+**/vault/raft/*
+**/vault/ssl/*
+**/vault/vault.db
