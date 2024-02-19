@@ -13,7 +13,7 @@ I've broken it into smaller articles to make it easier to read and revisit, plea
 - HashiCorp Vault
 - Jenkins
 
-## Article
+## Article (Work In Progress)
 - [ ] Part 0: Preparation Work
     <br/>[Link to article]() | [Link to video]()
 - [ ] Part 1: Setup Ngrok Service 
