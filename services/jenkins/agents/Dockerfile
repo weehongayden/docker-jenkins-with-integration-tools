@@ -32,7 +32,5 @@ RUN apt-get update
 # Install Docker Engine
 RUN apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
-RUN usermod -aG docker jenkins
-
 # Switch back to the Jenkins user
 USER jenkins
