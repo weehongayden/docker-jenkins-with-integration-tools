@@ -1,22 +1,6 @@
 version: "3.9"
 
 services:
-  ngrok:
-    container_name: ngrok
-    image: ngrok/ngrok:latest
-    ports:
-      - 80:4040
-    volumes:
-      - ./ngrok/ngrok.yaml:/etc/ngrok.yaml
-    command:
-      - start
-      - --all
-      - --config
-      - /etc/ngrok.yaml
-    restart: unless-stopped
-    networks:
-      - devops
-
   db:
     image: postgres:latest
     container_name: db
